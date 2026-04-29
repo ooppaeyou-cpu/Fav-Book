@@ -1,0 +1,240 @@
+/* การตั้งค่าสีและฟอนต์พื้นฐาน */
+:root {
+    --bg-color: #fce4ec;
+    --paper-color: #fdfbf7;
+    --text-main: #5d4037;
+    --accent-color: #ec407a;
+    --font-heading: 'Charm', cursive;
+    --font-body: 'Mali', cursive;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: radial-gradient(circle, var(--bg-color) 0%, #f8bbd0 100%);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ปุ่มควบคุมมุมขวาบน */
+.controls {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+}
+
+/* สมุดภาพ (Flipbook 3D) */
+.book-container {
+    perspective: 1200px; /* สร้างมิติ 3D */
+    width: 90%;
+    max-width: 500px; /* ขนาดกำลังดีสำหรับมือถือและแท็บเล็ต */
+    height: 80vh;
+    max-height: 700px;
+    position: relative;
+}
+
+.book {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+/* หน้ากระดาษแต่ละหน้า */
+.page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--paper-color);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.05), 5px 5px 15px rgba(0,0,0,0.1);
+    border-radius: 5px 15px 15px 5px;
+    padding: 30px 20px;
+    transform-origin: left center; /* จุดหมุนอยู่ที่สันหนังสือ (ซ้าย) */
+    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.6s ease;
+    backface-visibility: hidden; /* ซ่อนด้านหลังเวลาพลิก */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* คลาสเมื่อหน้าถูกพลิก */
+.page.flipped {
+    transform: rotateY(-180deg);
+    opacity: 0; /* เฟดหายไปเพื่อให้ดูเนียนบนหน้าจอเดียว */
+    pointer-events: none;
+}
+
+/* การตกแต่งเนื้อหาภายในหน้า */
+.page-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.center-content {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.8rem; }
+
+.handwriting {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+p.message {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 15px 0;
+}
+
+.date-text {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+/* รูปภาพตกแต่ง */
+img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.cover-img {
+    border: 5px solid white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 250px;
+    object-fit: cover;
+}
+
+.polaroid {
+    background: white;
+    padding: 10px 10px 40px 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: rotate(-3deg);
+}
+
+.clickable-img {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.clickable-img:hover {
+    transform: scale(1.05);
+}
+
+/* ปุ่มต่างๆ */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f48fb1;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.btn:hover { background-color: var(--accent-color); transform: translateY(-2px); }
+
+.page-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+
+.absolute-bottom {
+    position: absolute;
+    bottom: 20px;
+    width: calc(100% - 40px);
+}
+
+/* หน้าต่าง Modal รูปภาพ */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    max-width: 90%; max-height: 90%;
+    border-radius: 10px;
+    animation: zoomIn 0.3s;
+}
+.close-modal {
+    position: absolute;
+    top: 20px; right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@keyframes zoomIn {
+    from {transform: scale(0.8); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+}
+
+/* เอฟเฟกต์พิเศษ */
+.glowing-text {
+    text-shadow: 0 0 10px rgba(236, 64, 122, 0.5);
+}
+
+.hidden-message {
+    display: none;
+    background: #ffe0b2;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    color: #e65100;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;} to {opacity: 1;}
+}
+
+/* เอฟเฟกต์หัวใจลอย */
+.heart {
+    position: fixed;
+    bottom: -10vh;
+    font-size: 1.5rem;
+    animation: floatUp 4s linear infinite;
+    z-index: 500;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    to { transform: translateY(-110vh) rotate(360deg); }
+}

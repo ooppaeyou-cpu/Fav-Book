@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pages of Us - ของขวัญวันเกิด [ชื่อแฟน]</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Mali:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="controls">
+        <button id="heart-btn">💖 ปิดหัวใจ</button>
+    </div>
+
+    <audio id="bgm" loop>
+        <source src="[URL_เพลง_MP3_ของคุณ]" type="audio/mpeg">
+    </audio>
+
+    <div class="book-container">
+        <div class="book" id="book">
+            
+            <div class="page cover" id="page-0">
+                <div class="page-content center-content">
+                    <h1>Pages of Us</h1>
+                    <h2>Happy Birthday, My Love</h2>
+                    <div class="cover-image-container">
+                        <img src="https://via.placeholder.com/300x400/ffb6c1/ffffff?text=Cover+Photo" alt="Cover Photo" class="cover-img">
+                    </div>
+                    <button class="btn primary-btn" onclick="nextPage()">เปิดสมุดความรัก 📖</button>
+                </div>
+            </div>
+
+            <div class="page" id="page-1">
+                <div class="page-content">
+                    <h2 class="handwriting">แด่คนที่ฉันรักที่สุด...</h2>
+                    <p class="date-text">[ใส่วันที่วันเกิด เช่น 29 เมษายน 2026]</p>
+                    <p class="message">
+                        สุขสันต์วันเกิดนะ [ชื่อแฟน] 🎂<br>
+                        หนังสือเล่มนี้ตั้งใจทำขึ้นมาเพื่อเก็บรวบรวมเรื่องราวของเรา<br>
+                        ทุกๆ หน้าคือความทรงจำที่ฉันอยากเก็บไว้ตลอดไป
+                    </p>
+                    <div class="page-footer">
+                        <button class="btn nav-btn" onclick="prevPage()">หน้าก่อนหน้า</button>
+                        <button class="btn nav-btn" onclick="nextPage()">หน้าถัดไป</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page-2">
+                <div class="page-content">
+                    <h2 class="handwriting">จุดเริ่มต้นของเรา 🛤️</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="date">[วันที่เจอกัน]</span>
+                            <p>วันแรกที่เราได้รู้จักกัน</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="date">[วันที่คบกัน]</span>
+                            <p>วันที่เราตกลงเป็นแฟนกัน</p>
+                        </div>
+                    </div>
+                    <img src="https://via.placeholder.com/400x250/add8e6/ffffff?text=First+Date" alt="First Date" class="story-img clickable-img">
+                    <div class="page-footer">
+                        <button class="btn nav-btn" onclick="prevPage()">หน้าก่อนหน้า</button>
+                        <button class="btn nav-btn" onclick="nextPage()">หน้าถัดไป</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page-3">
+                <div class="page-content center-content">
+                    <h2 class="handwriting">ความทรงจำพิเศษ 📸</h2>
+                    <img src="https://via.placeholder.com/300x300/ffdab9/ffffff?text=Special+Memory" alt="Memory" class="story-img clickable-img polaroid">
+                    <p class="caption">ทริปแรกของเราที่ [ชื่อสถานที่]</p>
+                    <button class="btn secret-btn" onclick="alert('จำได้ไหมว่าวันนั้นเธอทำไอติมตก แล้วเราก็หัวเราะกันหนักมาก 555')">จำวันนี้ได้ไหม? 🔍</button>
+                    <div class="page-footer absolute-bottom">
+                        <button class="btn nav-btn" onclick="prevPage()">หน้าก่อนหน้า</button>
+                        <button class="btn nav-btn" onclick="nextPage()">หน้าถัดไป</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page-4">
+                <div class="page-content">
+                    <h2 class="handwriting">สิ่งที่รักในตัว [ชื่อแฟน] 💖</h2>
+                    <ul class="love-list">
+                        <li>✨ รอยยิ้มที่ทำให้โลกสดใส</li>
+                        <li>🥺 ความใจดีและใส่ใจคนอื่นเสมอ</li>
+                        <li>🍳 ฝีมือทำ [ชื่ออาหาร] ที่อร่อยที่สุด</li>
+                        <li>🧸 ความน่ารักตอนที่เธองอแง</li>
+                    </ul>
+                    
+                    <hr class="divider">
+                    
+                    <div class="secret-section">
+                        <h3>ข้อความลับ 🔒</h3>
+                        <p>ใส่รหัสผ่าน (วันครบรอบของเรา DDMM):</p>
+                        <input type="password" id="secret-input" placeholder="เช่น 1402">
+                        <button class="btn nav-btn" onclick="checkSecret()">ปลดล็อค</button>
+                        <p id="secret-message" class="hidden-message">ขอบคุณที่อยู่เคียงข้างกันมาตลอดนะ รักเธอที่สุดเลย! 👩‍❤️‍👨</p>
+                    </div>
+
+                    <div class="page-footer">
+                        <button class="btn nav-btn" onclick="prevPage()">หน้าก่อนหน้า</button>
+                        <button class="btn nav-btn" onclick="nextPage()">หน้าถัดไป</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page-5">
+                <div class="page-content center-content">
+                    <h2 class="handwriting glowing-text">บทต่อไปของเรา 📖</h2>
+                    <p class="message">
+                        ไม่ว่าอนาคตจะเป็นยังไง ขอแค่มีเราจับมือกันแบบนี้ไปเรื่อยๆ ก็พอ<br><br>
+                        <strong>"I love you forever"</strong>
+                    </p>
+                    <p class="signature">ลงชื่อ... [ชื่อของคุณ] ❤️<br>[วันที่]</p>
+                    
+                    <button class="btn primary-btn mt-2" onclick="resetBook()">อ่านอีกครั้ง 🔄</button>
+                    
+                    <div class="qr-section">
+                        <p class="small-text">สแกนรับของขวัญ 🎁</p>
+                        <img src="https://via.placeholder.com/100x100/000000/ffffff?text=QR" alt="Gift QR">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="image-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-img">
+    </div>
+
+    <div id="hearts-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
