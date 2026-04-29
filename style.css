@@ -175,6 +175,11 @@ img {
     bottom: 20px;
     width: calc(100% - 40px);
 }
+.story-img {
+  max-width: 100%;
+  width: 250px;
+  height: auto;
+}
 
 /* หน้าต่าง Modal รูปภาพ */
 .modal {
