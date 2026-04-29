@@ -2,10 +2,8 @@
 const pages = document.querySelectorAll('.page');
 let currentPage = 0;
 
-// ตั้งค่า Z-index เริ่มต้นให้หน้ากระดาษซ้อนกันอย่างถูกต้อง
 function initBook() {
     pages.forEach((page, index) => {
-        // หน้าแรกๆ จะต้องอยู่บนสุด (Z-index สูงสุด)
         page.style.zIndex = pages.length - index;
     });
 }
@@ -27,13 +25,10 @@ function prevPage() {
 function resetBook() {
     pages.forEach(page => page.classList.remove('flipped'));
     currentPage = 0;
-    // ปล่อย Confetti หรือหัวใจรัวๆ เมื่ออ่านจบและกดเริ่มใหม่
     createHearts(20);
 }
 
-// เริ่มต้นสมุด
 initBook();
-
 
 // --- ระบบ Modal ขยายรูปภาพ ---
 const modal = document.getElementById("image-modal");
@@ -53,19 +48,17 @@ window.addEventListener("click", (e) => {
     if (e.target === modal) modal.style.display = "none";
 });
 
-
 // --- ระบบรหัสลับ (Secret Message) ---
 function checkSecret() {
     const input = document.getElementById('secret-input').value;
     const message = document.getElementById('secret-message');
-    // เปลี่ยน "1402" เป็นรหัสผ่านที่คุณต้องการ
+    // รหัสผ่านคือ 0405
     if (input === '0405') {
         message.style.display = 'block';
     } else {
         alert('รหัสผ่านไม่ถูกต้อง ลองนึกถึงวันครบรอบของเราดูนะ 😊');
     }
 }
-
 
 // --- ระบบเสียงเพลง (BGM) ---
 const bgm = document.getElementById("bgm");
@@ -83,9 +76,7 @@ bgmBtn.addEventListener("click", () => {
     isPlaying = !isPlaying;
 });
 
-
-// --- ระบบหัวใจลอย (Floating Hearts) ---
-
+// --- ระบบหัวใจลอย (Floating Hearts แบบอัตโนมัติตลอดเวลา) ---
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
@@ -111,13 +102,5 @@ function createHearts(amount) {
     }
 }
 
-// สั่งให้สร้างหัวใจอัตโนมัติตลอดเวลา ทุกๆ 800 มิลลิวินาที (ปรับตัวเลขน้อยลง = หัวใจเยอะขึ้น)
+// สั่งให้สร้างหัวใจอัตโนมัติตลอดเวลา ทุกๆ 800 มิลลิวินาที 
 setInterval(createHeart, 800);
-
-heartBtn.addEventListener("click", () => {
-    heartsEnabled = !heartsEnabled;
-    heartBtn.innerText = heartsEnabled ? "💖 ปิดหัวใจ" : "💖 เปิดหัวใจ";
-    if (!heartsEnabled) {
-        document.getElementById("hearts-container").innerHTML = '';
-    }
-});
