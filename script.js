@@ -85,19 +85,21 @@ bgmBtn.addEventListener("click", () => {
 
 
 // --- ระบบหัวใจลอย (Floating Hearts) ---
-let heartInterval;
-let heartsEnabled = true;
-const heartBtn = document.getElementById("heart-btn");
 
 function createHeart() {
-    if (!heartsEnabled) return;
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerText = ["💖", "💕", "🌸", "✨"][Math.floor(Math.random() * 4)];
+    
+    // สุ่มตำแหน่งซ้ายขวา
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 2 + 3) + "s"; // 3-5 วินาที
+    
+    // สุ่มความเร็วในการลอย (3-5 วินาที)
+    heart.style.animationDuration = (Math.random() * 2 + 3) + "s"; 
+    
     document.getElementById("hearts-container").appendChild(heart);
 
+    // ลบหัวใจทิ้งเมื่อลอยสุดจอ เพื่อไม่ให้เครื่องค้าง
     setTimeout(() => {
         heart.remove();
     }, 5000);
@@ -109,8 +111,8 @@ function createHearts(amount) {
     }
 }
 
-// สร้างหัวใจอัตโนมัติทุกๆ 800ms
-heartInterval = setInterval(createHeart, 800);
+// สั่งให้สร้างหัวใจอัตโนมัติตลอดเวลา ทุกๆ 800 มิลลิวินาที (ปรับตัวเลขน้อยลง = หัวใจเยอะขึ้น)
+setInterval(createHeart, 800);
 
 heartBtn.addEventListener("click", () => {
     heartsEnabled = !heartsEnabled;
