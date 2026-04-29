@@ -60,21 +60,7 @@ function checkSecret() {
     }
 }
 
-// --- ระบบเสียงเพลง (BGM) ---
-const bgm = document.getElementById("bgm");
-const bgmBtn = document.getElementById("bgm-btn");
-let isPlaying = false;
 
-bgmBtn.addEventListener("click", () => {
-    if (isPlaying) {
-        bgm.pause();
-        bgmBtn.innerText = "🎵 เล่นเพลง";
-    } else {
-        bgm.play();
-        bgmBtn.innerText = "⏸️ หยุดเพลง";
-    }
-    isPlaying = !isPlaying;
-});
 
 // --- ระบบหัวใจลอย (Floating Hearts แบบอัตโนมัติตลอดเวลา) ---
 function createHeart() {
@@ -101,6 +87,9 @@ function createHearts(amount) {
         setTimeout(createHeart, i * 100);
     }
 }
-
+// ปล่อยหัวใจต้อนรับตอนเปิดเข้าเว็บครั้งแรก
+setTimeout(() => {
+    createHearts(30);
+}, 500);
 // สั่งให้สร้างหัวใจอัตโนมัติตลอดเวลา ทุกๆ 800 มิลลิวินาที 
 setInterval(createHeart, 800);
