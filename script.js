@@ -2,32 +2,57 @@
 const pages = document.querySelectorAll('.page');
 let currentPage = 0;
 
-// ตั้งค่า Z-index เริ่มต้นให้หน้ากระดาษซ้อนกันอย่างถูกต้อง
+// ตั้งค่า Z-index + active หน้าแรก
 function initBook() {
     pages.forEach((page, index) => {
-        // หน้าแรกๆ จะต้องอยู่บนสุด (Z-index สูงสุด)
         page.style.zIndex = pages.length - index;
     });
+
+    // 👇 สำคัญ: หน้าแรกต้อง active
+    pages[0].classList.add('active');
 }
 
 function nextPage() {
     if (currentPage < pages.length - 1) {
+        // เอา active ออกจากหน้าปัจจุบัน
+        pages[currentPage].classList.remove('active');
+
+        // พลิกหน้า
         pages[currentPage].classList.add('flipped');
+
+        // ไปหน้าถัดไป
         currentPage++;
+
+        // ใส่ active ให้หน้าถัดไป
+        pages[currentPage].classList.add('active');
     }
 }
 
 function prevPage() {
     if (currentPage > 0) {
+        // เอา active ออกจากหน้าปัจจุบัน
+        pages[currentPage].classList.remove('active');
+
+        // ย้อนกลับ
         currentPage--;
+
+        // เอา flipped ออก
         pages[currentPage].classList.remove('flipped');
+
+        // ใส่ active ให้หน้าที่กลับมา
+        pages[currentPage].classList.add('active');
     }
 }
 
 function resetBook() {
-    pages.forEach(page => page.classList.remove('flipped'));
+    pages.forEach(page => {
+        page.classList.remove('flipped');
+        page.classList.remove('active');
+    });
+
     currentPage = 0;
-    // ปล่อย Confetti หรือหัวใจรัวๆ เมื่ออ่านจบและกดเริ่มใหม่
+    pages[0].classList.add('active');
+
     createHearts(20);
 }
 
@@ -58,7 +83,7 @@ window.addEventListener("click", (e) => {
 function checkSecret() {
     const input = document.getElementById('secret-input').value;
     const message = document.getElementById('secret-message');
-    // เปลี่ยน "1402" เป็นรหัสผ่านที่คุณต้องการ
+
     if (input === '1402') {
         message.style.display = 'block';
     } else {
@@ -72,16 +97,18 @@ const bgm = document.getElementById("bgm");
 const bgmBtn = document.getElementById("bgm-btn");
 let isPlaying = false;
 
-bgmBtn.addEventListener("click", () => {
-    if (isPlaying) {
-        bgm.pause();
-        bgmBtn.innerText = "🎵 เล่นเพลง";
-    } else {
-        bgm.play();
-        bgmBtn.innerText = "⏸️ หยุดเพลง";
-    }
-    isPlaying = !isPlaying;
-});
+if (bgmBtn && bgm) {
+    bgmBtn.addEventListener("click", () => {
+        if (isPlaying) {
+            bgm.pause();
+            bgmBtn.innerText = "🎵 เล่นเพลง";
+        } else {
+            bgm.play();
+            bgmBtn.innerText = "⏸️ หยุดเพลง";
+        }
+        isPlaying = !isPlaying;
+    });
+}
 
 
 // --- ระบบหัวใจลอย (Floating Hearts) ---
@@ -91,11 +118,13 @@ const heartBtn = document.getElementById("heart-btn");
 
 function createHeart() {
     if (!heartsEnabled) return;
+
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerText = ["💖", "💕", "🌸", "✨"][Math.floor(Math.random() * 4)];
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 2 + 3) + "s"; // 3-5 วินาที
+    heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+
     document.getElementById("hearts-container").appendChild(heart);
 
     setTimeout(() => {
@@ -104,18 +133,21 @@ function createHeart() {
 }
 
 function createHearts(amount) {
-    for(let i=0; i<amount; i++) {
+    for (let i = 0; i < amount; i++) {
         setTimeout(createHeart, i * 100);
     }
 }
 
-// สร้างหัวใจอัตโนมัติทุกๆ 800ms
+// สร้างหัวใจอัตโนมัติ
 heartInterval = setInterval(createHeart, 800);
 
-heartBtn.addEventListener("click", () => {
-    heartsEnabled = !heartsEnabled;
-    heartBtn.innerText = heartsEnabled ? "💖 ปิดหัวใจ" : "💖 เปิดหัวใจ";
-    if (!heartsEnabled) {
-        document.getElementById("hearts-container").innerHTML = '';
-    }
-});
+if (heartBtn) {
+    heartBtn.addEventListener("click", () => {
+        heartsEnabled = !heartsEnabled;
+        heartBtn.innerText = heartsEnabled ? "💖 ปิดหัวใจ" : "💖 เปิดหัวใจ";
+
+        if (!heartsEnabled) {
+            document.getElementById("hearts-container").innerHTML = '';
+        }
+    });
+}
