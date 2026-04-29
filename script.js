@@ -2,57 +2,31 @@
 const pages = document.querySelectorAll('.page');
 let currentPage = 0;
 
-// ตั้งค่า Z-index + active หน้าแรก
+// ตั้งค่า Z-index เริ่มต้นให้หน้ากระดาษซ้อนกันอย่างถูกต้อง
 function initBook() {
     pages.forEach((page, index) => {
+        // หน้าแรกๆ จะต้องอยู่บนสุด (Z-index สูงสุด)
         page.style.zIndex = pages.length - index;
     });
-
-    // 👇 สำคัญ: หน้าแรกต้อง active
-    pages[0].classList.add('active');
 }
 
 function nextPage() {
     if (currentPage < pages.length - 1) {
-        // เอา active ออกจากหน้าปัจจุบัน
-        pages[currentPage].classList.remove('active');
-
-        // พลิกหน้า
         pages[currentPage].classList.add('flipped');
-
-        // ไปหน้าถัดไป
         currentPage++;
-
-        // ใส่ active ให้หน้าถัดไป
-        pages[currentPage].classList.add('active');
     }
 }
 
 function prevPage() {
     if (currentPage > 0) {
-        // เอา active ออกจากหน้าปัจจุบัน
-        pages[currentPage].classList.remove('active');
-
-        // ย้อนกลับ
         currentPage--;
-
-        // เอา flipped ออก
         pages[currentPage].classList.remove('flipped');
-
-        // ใส่ active ให้หน้าที่กลับมา
-        pages[currentPage].classList.add('active');
     }
 }
 
 function resetBook() {
-    pages.forEach(page => {
-        page.classList.remove('flipped');
-        page.classList.remove('active');
-    });
-
+    pages.forEach(page => page.classList.remove('flipped'));
     currentPage = 0;
-    pages[0].classList.add('active');
-
     createHearts(20);
 }
 
@@ -83,7 +57,6 @@ window.addEventListener("click", (e) => {
 function checkSecret() {
     const input = document.getElementById('secret-input').value;
     const message = document.getElementById('secret-message');
-
     if (input === '1402') {
         message.style.display = 'block';
     } else {
@@ -138,7 +111,7 @@ function createHearts(amount) {
     }
 }
 
-// สร้างหัวใจอัตโนมัติ
+// สร้างหัวใจอัตโนมัติทุกๆ 800ms
 heartInterval = setInterval(createHeart, 800);
 
 if (heartBtn) {
