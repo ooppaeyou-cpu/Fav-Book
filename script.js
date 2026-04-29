@@ -56,7 +56,7 @@ function checkSecret() {
     if (input === '0405') {
         message.style.display = 'block';
     } else {
-        alert('รหัสผ่านไม่ถูกต้อง ลองนึกถึงวันครบรอบของเราดูนะ 😊');
+        alert('รหัสผ่านไม่ถูกต้อง ลองใส่วันเกิดอ้วนดูสิ 😊');
     }
 }
 
