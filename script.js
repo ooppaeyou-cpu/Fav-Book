@@ -59,7 +59,7 @@ function checkSecret() {
     const input = document.getElementById('secret-input').value;
     const message = document.getElementById('secret-message');
     // เปลี่ยน "1402" เป็นรหัสผ่านที่คุณต้องการ
-    if (input === '1402') {
+    if (input === '0405') {
         message.style.display = 'block';
     } else {
         alert('รหัสผ่านไม่ถูกต้อง ลองนึกถึงวันครบรอบของเราดูนะ 😊');
