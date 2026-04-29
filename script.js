@@ -27,6 +27,7 @@ function prevPage() {
 function resetBook() {
     pages.forEach(page => page.classList.remove('flipped'));
     currentPage = 0;
+    // ปล่อย Confetti หรือหัวใจรัวๆ เมื่ออ่านจบและกดเริ่มใหม่
     createHearts(20);
 }
 
@@ -57,6 +58,7 @@ window.addEventListener("click", (e) => {
 function checkSecret() {
     const input = document.getElementById('secret-input').value;
     const message = document.getElementById('secret-message');
+    // เปลี่ยน "1402" เป็นรหัสผ่านที่คุณต้องการ
     if (input === '1402') {
         message.style.display = 'block';
     } else {
@@ -70,18 +72,16 @@ const bgm = document.getElementById("bgm");
 const bgmBtn = document.getElementById("bgm-btn");
 let isPlaying = false;
 
-if (bgmBtn && bgm) {
-    bgmBtn.addEventListener("click", () => {
-        if (isPlaying) {
-            bgm.pause();
-            bgmBtn.innerText = "🎵 เล่นเพลง";
-        } else {
-            bgm.play();
-            bgmBtn.innerText = "⏸️ หยุดเพลง";
-        }
-        isPlaying = !isPlaying;
-    });
-}
+bgmBtn.addEventListener("click", () => {
+    if (isPlaying) {
+        bgm.pause();
+        bgmBtn.innerText = "🎵 เล่นเพลง";
+    } else {
+        bgm.play();
+        bgmBtn.innerText = "⏸️ หยุดเพลง";
+    }
+    isPlaying = !isPlaying;
+});
 
 
 // --- ระบบหัวใจลอย (Floating Hearts) ---
@@ -91,13 +91,11 @@ const heartBtn = document.getElementById("heart-btn");
 
 function createHeart() {
     if (!heartsEnabled) return;
-
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerText = ["💖", "💕", "🌸", "✨"][Math.floor(Math.random() * 4)];
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
-
+    heart.style.animationDuration = (Math.random() * 2 + 3) + "s"; // 3-5 วินาที
     document.getElementById("hearts-container").appendChild(heart);
 
     setTimeout(() => {
@@ -106,7 +104,7 @@ function createHeart() {
 }
 
 function createHearts(amount) {
-    for (let i = 0; i < amount; i++) {
+    for(let i=0; i<amount; i++) {
         setTimeout(createHeart, i * 100);
     }
 }
@@ -114,13 +112,10 @@ function createHearts(amount) {
 // สร้างหัวใจอัตโนมัติทุกๆ 800ms
 heartInterval = setInterval(createHeart, 800);
 
-if (heartBtn) {
-    heartBtn.addEventListener("click", () => {
-        heartsEnabled = !heartsEnabled;
-        heartBtn.innerText = heartsEnabled ? "💖 ปิดหัวใจ" : "💖 เปิดหัวใจ";
-
-        if (!heartsEnabled) {
-            document.getElementById("hearts-container").innerHTML = '';
-        }
-    });
-}
+heartBtn.addEventListener("click", () => {
+    heartsEnabled = !heartsEnabled;
+    heartBtn.innerText = heartsEnabled ? "💖 ปิดหัวใจ" : "💖 เปิดหัวใจ";
+    if (!heartsEnabled) {
+        document.getElementById("hearts-container").innerHTML = '';
+    }
+});
