@@ -69,11 +69,9 @@ body {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    pointer-events: none;
+
 }
-.page.active {
-  pointer-events: auto;
-}
+
 /* คลาสเมื่อหน้าถูกพลิก */
 .page.flipped {
     transform: rotateY(-180deg);
