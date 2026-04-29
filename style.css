@@ -128,7 +128,8 @@ img {
 .cover-img {
     border: 5px solid white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    max-height: 250px;
+    max-width: 700%;
+    max-height: 300px;
     object-fit: cover;
 }
 
