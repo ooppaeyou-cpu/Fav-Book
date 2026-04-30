@@ -52,8 +52,8 @@ window.addEventListener("click", (e) => {
 function checkSecret() {
     const input = document.getElementById('secret-input').value;
     const message = document.getElementById('secret-message');
-    // รหัสผ่านคือ 0405
-    if (input === '0405') {
+    // รหัสผ่านคือ 0205
+    if (input === '0205') {
         message.style.display = 'block';
     } else {
         alert('รหัสผ่านไม่ถูกต้อง ลองใส่วันเกิดอ้วนดูสิ 😊');
