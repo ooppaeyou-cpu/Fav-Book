@@ -97,7 +97,8 @@ setInterval(createHeart, 800);
 
 // ตั้งคู่วันและเวลาที่ต้องการให้เปิดได้ (รูปแบบ: "เดือน/วัน/ปี ชั่วโมง:นาที:วินาที")
 // ตัวอย่าง: ถ้าอยากให้เปิดได้วันที่ 2 พฤษภาคม 2026 เวลาเที่ยงคืนตรง
-const unlockDate = new Date(2026, 4, 1, 14, 38, 0).getTime();
+// ปี 2027, เดือน 4 (พฤษภาคม), วันที่ 2, 00 นาฬิกา, 00 นาที, 00 วินาที
+const unlockDate = new Date(2027, 4, 2, 0, 0, 0).getTime();
 const lockScreen = document.getElementById("lock-screen");
 
 const countdownTimer = setInterval(() => {
