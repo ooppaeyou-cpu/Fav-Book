@@ -70,13 +70,18 @@
 <body>
 <div id="lock-screen" class="lock-screen">
         <div class="lock-content">
-            <h1 class="handwriting glowing-text">รอก่อนนะอ้วนน ⏳</h1>
-            <p style="margin-bottom: 15px; color: #888;">สมุดเล่มนี้จะเปิดได้ในอีก</p>
+            <h1 id="lock-title" class="handwriting glowing-text">รอก่อนนะอ้วนน ⏳</h1>
+            <p id="lock-desc" style="margin-bottom: 15px; color: #888;">สมุดเล่มนี้จะเปิดได้ในอีก</p>
+            
             <div id="countdown" class="countdown">
                 <div><span id="hours">00</span><br><small>ชั่วโมง</small></div>
                 <div><span id="minutes">00</span><br><small>นาที</small></div>
                 <div><span id="seconds">00</span><br><small>วินาที</small></div>
             </div>
+
+            <button id="unlock-btn" class="btn primary-btn" style="display: none; margin: 20px auto 0; font-size: 1.2rem;">
+                เปิดสมุดเลยย! 🔓
+            </button>
         </div>
     </div>
 
