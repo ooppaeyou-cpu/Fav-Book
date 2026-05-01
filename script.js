@@ -93,3 +93,34 @@ setTimeout(() => {
 }, 500);
 // สั่งให้สร้างหัวใจอัตโนมัติตลอดเวลา ทุกๆ 800 มิลลิวินาที 
 setInterval(createHeart, 800);
+// --- ระบบนับถอยหลัง (Countdown Lock Screen) ---
+
+// ตั้งคู่วันและเวลาที่ต้องการให้เปิดได้ (รูปแบบ: "เดือน/วัน/ปี ชั่วโมง:นาที:วินาที")
+// ตัวอย่าง: ถ้าอยากให้เปิดได้วันที่ 2 พฤษภาคม 2026 เวลาเที่ยงคืนตรง
+const unlockDate = new Date("05/02/2026 00:00:00").getTime();
+
+const lockScreen = document.getElementById("lock-screen");
+
+const countdownTimer = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = unlockDate - now;
+
+    if (distance < 0) {
+        // หมดเวลาแล้ว ให้ซ่อนหน้า Lock Screen
+        clearInterval(countdownTimer);
+        lockScreen.style.opacity = "0"; // ค่อยๆ จางหายไป
+        setTimeout(() => {
+            lockScreen.style.display = "none"; // เอาออกจากหน้าจอ
+        }, 1000);
+    } else {
+        // คำนวณเวลาที่เหลืออยู่
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // แสดงผลตัวเลข (padStart ช่วยเติมเลข 0 ด้านหน้าถ้าเป็นเลขหลักเดียว)
+        document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+        document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+        document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+    }
+}, 1000);
