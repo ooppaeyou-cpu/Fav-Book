@@ -114,8 +114,8 @@ const countdownTimer = setInterval(() => {
         
         // ซ่อนตัวเลข เปลี่ยนข้อความ และแสดงปุ่มกดเปิด
         document.getElementById("countdown").style.display = "none";
-        document.getElementById("lock-title").innerText = "ถึงเวลาแล้ว! 🎉";
-        document.getElementById("lock-desc").innerText = "พร้อมจะเปิดดูความทรงจำของเราหรือยัง?";
+        document.getElementById("lock-title").innerText = "เที่ยงคืนแล้ววว🎉";
+        document.getElementById("lock-desc").innerText = "อ้วนพร้อมจะเปิดยังงง";
         unlockBtn.style.display = "block"; // แสดงปุ่ม
 
     } else {
