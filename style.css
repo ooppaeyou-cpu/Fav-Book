@@ -310,3 +310,12 @@ img {
     color: #5d4037;
     font-family: var(--font-body);
 }
+/* บังคับให้ข้อความทุกอย่างในหน้าจอล็อค ใช้ฟอนต์น่ารักแบบในรูป (Mali) */
+.lock-screen, 
+.lock-screen h1, 
+.lock-screen p, 
+.lock-screen span, 
+.lock-screen small, 
+.lock-screen button {
+    font-family: var(--font-body) !important;
+}
