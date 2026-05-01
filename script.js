@@ -98,29 +98,49 @@ setInterval(createHeart, 800);
 // ตั้งคู่วันและเวลาที่ต้องการให้เปิดได้ (รูปแบบ: "เดือน/วัน/ปี ชั่วโมง:นาที:วินาที")
 // ตัวอย่าง: ถ้าอยากให้เปิดได้วันที่ 2 พฤษภาคม 2026 เวลาเที่ยงคืนตรง
 // ปี 2027, เดือน 4 (พฤษภาคม), วันที่ 2, 00 นาฬิกา, 00 นาที, 00 วินาที
-const unlockDate = new Date(2027, 4, 2, 0, 0, 0).getTime();
+// --- ระบบนับถอยหลัง และปุ่มกดเปิด (Countdown & Unlock) ---
+const unlockDate = new Date(2026, 4, 1, 14, 42, 0).getTime();
+//const unlockDate = new Date(2027, 4, 2, 0, 0, 0).getTime();
 const lockScreen = document.getElementById("lock-screen");
+const unlockBtn = document.getElementById("unlock-btn");
 
 const countdownTimer = setInterval(() => {
     const now = new Date().getTime();
     const distance = unlockDate - now;
 
     if (distance < 0) {
-        // หมดเวลาแล้ว ให้ซ่อนหน้า Lock Screen
+        // หมดเวลาแล้ว! ให้หยุดนับถอยหลัง
         clearInterval(countdownTimer);
-        lockScreen.style.opacity = "0"; // ค่อยๆ จางหายไป
-        setTimeout(() => {
-            lockScreen.style.display = "none"; // เอาออกจากหน้าจอ
-        }, 1000);
+        
+        // ซ่อนตัวเลข เปลี่ยนข้อความ และแสดงปุ่มกดเปิด
+        document.getElementById("countdown").style.display = "none";
+        document.getElementById("lock-title").innerText = "ถึงเวลาแล้ว! 🎉";
+        document.getElementById("lock-desc").innerText = "พร้อมจะเปิดดูความทรงจำของเราหรือยัง?";
+        unlockBtn.style.display = "block"; // แสดงปุ่ม
+
     } else {
         // คำนวณเวลาที่เหลืออยู่
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // แสดงผลตัวเลข (padStart ช่วยเติมเลข 0 ด้านหน้าถ้าเป็นเลขหลักเดียว)
-        document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+        const totalHours = (days * 24) + hours;
+        
+        document.getElementById("hours").innerText = totalHours.toString().padStart(2, '0');
         document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
         document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
     }
 }, 1000);
+
+// เมื่อกดปุ่ม "เปิดสมุดเลย!" ให้ซ่อนหน้าล็อคและปล่อยหัวใจ
+unlockBtn.addEventListener("click", () => {
+    lockScreen.style.opacity = "0"; // ค่อยๆ จางหายไป
+    
+    // ปล่อยหัวใจต้อนรับ 30 ดวง ตอนที่กดปุ่ม
+    createHearts(30);
+
+    setTimeout(() => {
+        lockScreen.style.display = "none"; // เอาออกจากหน้าจอหลังจางหายเสร็จ
+    }, 1000);
+});
