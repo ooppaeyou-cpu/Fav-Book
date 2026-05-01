@@ -99,8 +99,8 @@ setInterval(createHeart, 800);
 // ตัวอย่าง: ถ้าอยากให้เปิดได้วันที่ 2 พฤษภาคม 2026 เวลาเที่ยงคืนตรง
 // ปี 2027, เดือน 4 (พฤษภาคม), วันที่ 2, 00 นาฬิกา, 00 นาที, 00 วินาที
 // --- ระบบนับถอยหลัง และปุ่มกดเปิด (Countdown & Unlock) ---
-//const unlockDate = new Date(2026, 4, 1, 14, 50, 0).getTime();
-const unlockDate = new Date(2026, 4, 2, 0, 0, 0).getTime();
+const unlockDate = new Date(2026, 4, 1, 15, 3, 0).getTime();
+//const unlockDate = new Date(2026, 4, 2, 0, 0, 0).getTime();
 const lockScreen = document.getElementById("lock-screen");
 const unlockBtn = document.getElementById("unlock-btn");
 
